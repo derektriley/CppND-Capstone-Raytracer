@@ -5,6 +5,7 @@
 #include "RGBColor.h"
 #include "Sphere.h"
 #include "Constants.h"
+#include <fstream>
 
 class Tracer;
 
@@ -15,15 +16,19 @@ class World {
         RGBColor background_color;
         Sphere sphere;
         Tracer* tracer_ptr;
+        std::ofstream outputFile;
+        RGBColor** colors;
 
         World(); // constructor
 
+        ~World();
+
         void build();
 
-        void render_scene() const;
+        void render_scene();
 
         void open_window(const int hres, const int vres) const;
 
-        void display_pixel(const int row, const int column, const RGBColor &pixel_color) const;
+        void display_pixel(const int row, const int column, const RGBColor &pixel_color);
 };
 #endif
