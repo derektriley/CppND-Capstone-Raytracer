@@ -17,8 +17,8 @@ World::~World() {
 }
 
 void World::build() {
-    vp.set_hres(600);
-    vp.set_vres(600);
+    vp.set_hres(1920);
+    vp.set_vres(1080);
     vp.set_pixel_size(1.0);
 
     background_color = black;
