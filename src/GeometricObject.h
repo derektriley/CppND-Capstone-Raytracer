@@ -6,6 +6,8 @@
 class GeometricObject {
 
     public:
+        RGBColor color;
+
         GeometricObject();
         GeometricObject(const GeometricObject& object);
         virtual ~GeometricObject();

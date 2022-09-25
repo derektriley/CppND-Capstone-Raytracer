@@ -21,9 +21,7 @@ class ShadeRec {
         RGBColor color;
 
         ShadeRec(World& wr);
-
         ShadeRec(const ShadeRec& sr);
-
 };
 
 #endif

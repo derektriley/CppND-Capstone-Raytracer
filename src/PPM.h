@@ -17,7 +17,8 @@ class PPM {
     public:
         static void writeHeader(std::ofstream& outputFile, const int width, const int height);
 
-        static void writeImage(std::ofstream& outputFile, RGBColor** colors, const int width, const int height);
+        static void writeImage(std::ofstream& outputFile, std::vector<std::vector<std::unique_ptr<RGBColor>>>  colors, 
+                               const int width, const int height);
 
 };
 
@@ -32,16 +33,16 @@ void PPM::writeHeader(std::ofstream& outputFile, const int width, const int heig
     }
 };
 
-void PPM::writeImage(std::ofstream& outputFile, RGBColor** colors, const int width, const int height) {
+void PPM::writeImage(std::ofstream& outputFile, std::vector<std::vector<std::unique_ptr<RGBColor>>> colors, const int width, const int height) {
     if (!outputFile.is_open()) {
         std::cout << "Output file is not open. Exiting...\n";
     } else {
         // R G B
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                outputFile << static_cast<int>(colors[i][j].r * 255.0f) << " " 
-                           << static_cast<int>(colors[i][j].g * 255.0f) << " " 
-                           << static_cast<int>(colors[i][j].b * 255.0f) << "  ";
+                outputFile << static_cast<int>(colors[i][j]->r * 255.0f) << " " 
+                           << static_cast<int>(colors[i][j]->g * 255.0f) << " " 
+                           << static_cast<int>(colors[i][j]->b * 255.0f) << "  ";
             }
             outputFile << "\n";
         }

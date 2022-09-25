@@ -3,30 +3,66 @@ Simple Bare-bones Raytracer for C++ ND.
 
 See https://en.wikipedia.org/wiki/Ray_tracing_(graphics) for general information on the concept of Raytracing.
 
-Concepts and some object-oriented design taken from
+Concepts and some object-oriented design taken from\
 Ray Tracing from the Group Up
 Book by Kevin Suffern
 
+The raytracer program will produce a .PPM image file with a Blue and Red Sphere, with the Blue Sphere being closer to the camera. The image will be placed in the current directory named raytrace.ppm. You can specify a different output file name. See `-h`
 
 ## File and Class Structure
+All the project's source and header files are located in the `/src` directory. The class structure is object oriented.
+
+`Raytracer.cpp` contains the `main()` method for the application. This will handle command line argument processing and chunking the work for multi-threading if specified.
+
+Objects like `Sphere` inherit from `GeometricObject` which allows the raytracer to be flexible for future object definitons.
+
+`World` contains a `Tracer` which can be inherited by other classes such as `MultiObject` which can handle tracing rays for multiple objects in the scene. This allows for extension later.
+
+In terms of the math required for the Raytracer, classes `Vector3D`, `Point3D` are the most relevent in the project's current state. There has been many operators overloaded to aid in the simplification of math for ray-object intersections.
+
+`PPM` This class handles writing `RGBColor` instances to the ppm file format specification.
 
 
 ## Expected Program Behavior
 
+The Raytracer should produce the following image:
+![Raytrace Image](/example/Example_Output.png "Image")
+
+### Running with 1 Thread (default)
+
+<code>~/CppND-Capstone-Raytracer/build$ ./raytracer -t 1\
+Number of threads set to 1\
+Opening file raytrace.ppm for writing\
+Splitting work into chunks...\
+Chunk[0]: 0 1079\
+Render Time(ms): 447</code>
+
+### Running with n Threads (-t)
+<code>~/CppND-Capstone-Raytracer/build$ ./raytracer -t 8\
+Number of threads set to 8\
+Opening file raytrace.ppm for writing\
+Splitting work into chunks...\
+Chunk[0]: 0 135\
+Chunk[1]: 135 270\
+Chunk[2]: 270 405\
+Chunk[3]: 405 540\
+Chunk[4]: 540 675\
+Chunk[5]: 675 810\
+Chunk[6]: 810 945\
+Chunk[7]: 945 1079\
+Render Time(ms): 68</code>
+
+### Expected Image Result
 
 ## Dependencies for Running Locally
 * cmake >= 2.8
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
   * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools
-
-Indicate file and class structure, along with expected behavior or ouput of the program
-
-Indicate which rubric points are addressed. List files and line numbers that rubric points are addressed. to get make](https://developer.apple.com/xcode/features/)
+  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
   * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* Boost >= 1.74
-  * The OpenCV 4.1.0 source code can be found [here](https://github.com/opencv/opencv/tree/4.1.0)
+* Boost >= 1.58
+  * The Boost 1.80.0 source code can be found [here](https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/)
 * gcc/g++ >= 5.4
   * Linux: gcc / g++ is installed by default on most Linux distros
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
@@ -41,7 +77,7 @@ Indicate which rubric points are addressed. List files and line numbers that rub
 5. Run: `./raytracer -h`. To view help options.
 
 ## Project Rubric Crtiteria
-Many of the project rubric criteria was met and I have listed out 10 criteria that has been met by this project.
+Many of the project rubric criteria was met and I have listed out some criteria that has been met by this project.
 
 1. **The project reads data from a file and process the data, or the program writes data to a file.**
 The raytracer write a image of file format PPM, PPM.h contains the methods for writing to a file.
@@ -61,5 +97,3 @@ The raytracer write a image of file format PPM, PPM.h contains the methods for w
 8. **The project uses smart pointers instead of raw pointers.**
 
 9. **The project uses multithreading.**
-
-10. **A promise and a future is used in the project.**
