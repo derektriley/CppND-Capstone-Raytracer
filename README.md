@@ -79,21 +79,30 @@ Render Time(ms): 68</code>
 ## Project Rubric Crtiteria
 Many of the project rubric criteria was met and I have listed out some criteria that has been met by this project.
 
-1. **The project reads data from a file and process the data, or the program writes data to a file.**
-The raytracer write a image of file format PPM, PPM.h contains the methods for writing to a file.
+1. **The project reads data from a file and process the data, or the program writes data to a file.**\
+`PPM.h::36` The raytracer write a image of file format PPM, PPM.h contains the methods for writing to a file.
 
-2. **The project accepts user input and processes the input.** The project accpets input via command line arguments via Boost's program_arguments component and performs processing on them to use in the raytracer.
+2. **The project accepts user input and processes the input.**\
+`Raytracer.cpp::34` The project accpets input via command line arguments via Boost's program_arguments component and performs processing on them to use in the raytracer.
 
-3. **The project uses Object Oriented Programming techniques.**
+3. **The project uses Object Oriented Programming techniques.**\
+`GeometricObject.h` is a base class for `Sphere.h`
 
-4. **Classes use appropriate access specifiers for class members.**
+4. **Classes use appropriate access specifiers for class members.**\
+Most class members are public in order to allow for easier definition of mathmatical functions like ray geometric object intersections. 
 
-5. **Class constructors utilize member intialization lists.**
+5. **Class constructors utilize member intialization lists.**\
+Most classes use intialization lists for their constructors. See `Vector3D.h::29`
 
-6. **Classes follow an appropriate inheritance hierarchy.**
+6. **Classes follow an appropriate inheritance hierarchy.**\
+`GeometricObject.h` is a base class for `Sphere.h`\
+`Tracer.h` is a base class for `MultiObject.h`
 
-7. **Derived class functions override virtual base class functions.**
+7. **Derived class functions override virtual base class functions.**\
+See `GeometricObject.h::14` for the hit function which is overwritten by classes which inherit from GeometricObject.
 
-8. **The project uses smart pointers instead of raw pointers.**
+8. **The project uses smart pointers instead of raw pointers.**\
+See `World.h` for the use of smart pointers intead of raw pointers for the RGBColor's per pixel and GeometricObjects.
 
-9. **The project uses multithreading.**
+9. **The project uses multithreading.**\
+See `Raytracer.cpp::89` for the use of `std::thread` the rows of the image are chunked into roughly equal intervals for processing  
